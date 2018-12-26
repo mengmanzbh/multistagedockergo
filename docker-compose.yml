@@ -1,7 +1,7 @@
 version: '3'
 services:
   consumer:
-    build: ./consumer/ .
+    build: ./consumer/.
 
   producer:
-    build: ./producer/ .
+    build: ./producer/.
