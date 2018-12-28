@@ -34,16 +34,19 @@ func main() {
 	failOnError(err, "Failed to declare a queue")
 
 	body := bodyFrom(os.Args)
-	err = ch.Publish(
-		"",     // exchange
-		q.Name, // routing key
-		false,  // mandatory
-		false,
-		amqp.Publishing{
+       /* for 循环模拟高并发 */
+       for a := 0; a < 10; a++ {
+	     err = ch.Publish(
+		  "",     // exchange
+		  q.Name, // routing key
+		  false,  // mandatory
+		  false,
+		  amqp.Publishing{
 			DeliveryMode: amqp.Persistent,
 			ContentType:  "text/plain",
 			Body:         []byte(body),
 		})
+        }
 	failOnError(err, "Failed to publish a message")
 	log.Printf(" [x] Sent %s", body)
 }
