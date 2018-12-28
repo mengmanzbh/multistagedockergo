@@ -36,6 +36,7 @@ func main() {
 	body := bodyFrom(os.Args)
        /* for 循环模拟高并发 */
        for a := 0; a < 10; a++ {
+	     body = strings.Join(body, a)
 	     err = ch.Publish(
 		  "",     // exchange
 		  q.Name, // routing key
