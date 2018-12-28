@@ -4,7 +4,7 @@ import (
 	"log"
 	"os"
 	"strings"
-
+        "strconv"
 	"github.com/streadway/amqp"
 )
 
@@ -36,7 +36,7 @@ func main() {
 	body := bodyFrom(os.Args)
        /* for 循环模拟高并发 */
        for a := 0; a < 10; a++ {
-	     body = strings.Join(body, a)
+	     body := body + "-" + strconv.Itoa(a)
 	     err = ch.Publish(
 		  "",     // exchange
 		  q.Name, // routing key
